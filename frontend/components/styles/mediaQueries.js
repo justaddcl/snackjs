@@ -1,9 +1,11 @@
 const mediaQueries = {
-  mqMobile: '376px',
-  mqTablet: '768px',
-  mqDesktopSmall: '1024px',
-  mqDesktopMedium: '1280px',
-  mqDesktopLarge: '1440px',
+  mobile: '376px',
+  tablet: '768px',
+  desktop: {
+    small: '1024px',
+    medium: '1280px',
+    large: '1440px',
+  },
 };
 
 export default mediaQueries;
