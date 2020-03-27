@@ -11,7 +11,7 @@ const StyledMobileNav = styled.nav`
   overflow-y: scroll;
   position: fixed;
   transform: translate3d(-100vw, 0, 0);
-  transition: all 0.3s cubic-bezier(0.68, 0, 0.265, 1.3);
+  transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   width: 100vw;
   z-index: 999;
 
@@ -19,6 +19,7 @@ const StyledMobileNav = styled.nav`
     background-color: white;
     opacity: 1;
     transform: translate3d(0vw, 0, 0);
+    transition: transform 0.25s cubic-bezier(0, 0, 0.2, 1);
   }
 
   .menu {
