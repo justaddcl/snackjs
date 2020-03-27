@@ -101,8 +101,8 @@ const Header = props => (
       </div>
       <Nav />
       <AuxiliaryMenu />
-      <MobileNav />
     </HeaderContainer>
+    <MobileNav />
   </StyledHeader>
 );
 
