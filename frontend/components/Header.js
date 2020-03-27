@@ -24,7 +24,7 @@ const StyledHeader = styled.header`
   .menu {
     background-color: inherit;
     border: none;
-    color: $indigo-900;
+    color: ${theme.colors.indigo[900]};
     cursor: pointer;
     display: grid;
     height: inherit;
