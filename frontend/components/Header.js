@@ -70,7 +70,7 @@ const StyledHeader = styled.header`
   }
 `;
 
-const FooterContainer = styled(ContentContainer)`
+const HeaderContainer = styled(ContentContainer)`
   align-items: center;
   display: grid;
   grid-template-columns: 48px 1fr;
@@ -85,7 +85,7 @@ const FooterContainer = styled(ContentContainer)`
 
 const Header = props => (
   <StyledHeader className="content-container">
-    <FooterContainer>
+    <HeaderContainer>
       <button
         className="menu"
         type="button"
@@ -102,7 +102,7 @@ const Header = props => (
       <Nav />
       <AuxiliaryMenu />
       <MobileNav />
-    </FooterContainer>
+    </HeaderContainer>
   </StyledHeader>
 );
 
