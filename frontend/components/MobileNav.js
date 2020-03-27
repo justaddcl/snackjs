@@ -101,7 +101,7 @@ const MobileNav = () => (
           <a className="link large">Events</a>
         </Link>
       </li>
-      ${ /* if the user is an admin  */ }
+      { /* if the user is an admin  */ }
       <li className="divider"></li>
       <li className="header">Admin</li>
       <li>
@@ -114,7 +114,7 @@ const MobileNav = () => (
           Create an event
         </a>
       </li>
-      ${ /* end is admin if */ }
+      { /* end is admin if */ }
       <li className="divider"></li>
       <li>
         <a href="#" className="link user">
@@ -146,10 +146,10 @@ const MobileNav = () => (
           Accounts settings
         </a>
       </li>
-      <li>${/* log out link */}</li>
-      ${ /* else if user not logged in */ }
-      <li>${/* link to log in */}</li>
-      ${ /* end if user logged in */ }
+      <li>{/* log out link */}</li>
+      { /* else if user not logged in */ }
+      <li>{/* link to log in */}</li>
+      { /* end if user logged in */ }
     </ul>
   </StyledMobileNav>
 );
