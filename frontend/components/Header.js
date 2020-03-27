@@ -21,7 +21,7 @@ const StyledHeader = styled.header`
     height: 4px;
   }
 
-  .menu {
+  .menu-button {
     background-color: inherit;
     border: none;
     color: ${theme.colors.indigo[900]};
@@ -63,7 +63,7 @@ const StyledHeader = styled.header`
       }
     }
 
-    .menu {
+    .menu-button {
       display: none;
     }
   }
@@ -113,7 +113,7 @@ const Header = props => (
   <StyledHeader>
     <HeaderContainer>
       <button
-        className="menu"
+        className="menu-button"
         type="button"
         ariaLabel="Menu"
         ariaControls="navigation"
