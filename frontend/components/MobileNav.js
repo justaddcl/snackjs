@@ -98,7 +98,7 @@ const MobileNav = () => (
       </li>
       <li>
         <Link href="/smallgroups">
-          <a className="link large">Events</a>
+          <a className="link large">Small Groups</a>
         </Link>
       </li>
       { /* if the user is an admin  */ }
