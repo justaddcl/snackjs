@@ -31,7 +31,6 @@ const StyledHeader = styled.header`
     margin-left: -16px;
     place-items: center center;
     width: 100%;
-    z-index: 99;
 
     > .icon {
       font-size: 18px;
@@ -75,6 +74,7 @@ const HeaderContainer = styled(ContentContainer)`
   display: grid;
   grid-template-columns: 48px 1fr;
   height: 60px;
+  z-index: 9;
 
   @media screen and (min-width: ${theme.mediaQueries.desktop.small}) {
     grid-gap: 24px;
@@ -82,6 +82,32 @@ const HeaderContainer = styled(ContentContainer)`
     height: 81px;
   }
 `;
+
+const MobileNavOverlay = styled.div`
+  display: none;
+
+  &.mobile-nav-visible {
+    background-color: ${theme.colors.blueGrey[900]}55;
+    display: block;
+    height: 100vh;
+    position: fixed;
+    width: 100vw;
+    z-index: 1;
+
+    @media screen and (min-width: ${theme.mediaQueries.desktop.small}) {
+      display: none;
+    }
+  }
+`;
+
+const toggleMobileMenu = e => {
+  e.currentTarget.firstChild.classList.toggle('fa-times');
+  e.currentTarget.firstChild.classList.toggle('fa-bars');
+  document.querySelector('nav.nav-mobile').classList.toggle('open');
+  document
+    .querySelector('div[class*="MobileNavOverlay"]')
+    .classList.toggle('mobile-nav-visible');
+};
 
 const Header = props => (
   <StyledHeader>
@@ -91,6 +117,7 @@ const Header = props => (
         type="button"
         ariaLabel="Menu"
         ariaControls="navigation"
+        onClick={toggleMobileMenu}
       >
         <i className="icon fas fa-bars"></i>
       </button>
@@ -103,6 +130,7 @@ const Header = props => (
       <AuxiliaryMenu />
     </HeaderContainer>
     <MobileNav />
+    <MobileNavOverlay />
   </StyledHeader>
 );
 
