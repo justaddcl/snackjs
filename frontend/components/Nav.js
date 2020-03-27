@@ -1,7 +1,11 @@
 import Link from 'next/link';
+import styled from 'styled-components';
+
+const StyledNav = styled.nav`
+`;
 
 const Nav = props => (
-  <div>
+  <StyledNav>
     <nav className="nav">
       <ul className="nav__menu">
         <li className="nav__item">
@@ -16,7 +20,7 @@ const Nav = props => (
         </li>
       </ul>
     </nav>
-  </div>
+  </StyledNav>
 );
 
 export default Nav;
