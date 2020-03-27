@@ -84,7 +84,7 @@ const HeaderContainer = styled(ContentContainer)`
 `;
 
 const Header = props => (
-  <StyledHeader className="content-container">
+  <StyledHeader>
     <HeaderContainer>
       <button
         className="menu"
