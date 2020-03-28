@@ -18,7 +18,11 @@ const StyledNav = styled.nav`
 
     &:hover:after {
       animation: hover-underline 0.3s cubic-bezier(0.68, 0, 0.265, 1.3);
-      background: linear-gradient(135deg, #240754, #7b93db);
+      background: linear-gradient(
+        135deg,
+        ${theme.colors.gradient.purple},
+        ${theme.colors.gradient.blue}
+      );
       /* box-shadow: inset 0 -2px 0 0 #111; */
       content: '';
       display: block;
