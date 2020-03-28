@@ -6,6 +6,7 @@ import AuxiliaryDropdownContainer from './styles/AuxiliaryDropdownContainer';
 import AuxiliaryDropdownMenu from './styles/AuxiliaryDropdownMenu';
 import AuxiliaryDropdownItem from './styles/AuxiliaryDropdownItem';
 import AuxiliaryDropdownLink from './styles/AuxiliaryDropdownLink';
+import UserAvatar from './UserAvatar';
 
 const DashboardLink = styled.a`
   background: ${theme.colors.indigo[900]};
@@ -48,11 +49,7 @@ const UserMenu = () => (
   <AuxiliaryDropdown className="auxiliary-dropdown">
     <AuxiliaryDropdownContainer>
       <UserProfile>
-        <img
-          className="user-avatar user-avatar--48"
-          src="https://source.unsplash.com/collection/8470962/48x48"
-          alt="User avatar"
-        />
+        <UserAvatar size="48" />
         <UserProfileText>
           <UserName>Current User</UserName>
           <Link href="/">
