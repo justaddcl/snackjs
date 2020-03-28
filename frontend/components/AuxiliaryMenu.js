@@ -5,6 +5,7 @@ import DropdownIcon from './DropdownIcon';
 import AdminMenu from './AdminMenu';
 import CoordinatorMenu from './CoordinatorMenu';
 import UserMenu from './UserMenu';
+import UserAvatar from './UserAvatar';
 
 const StyledAuxiliaryMenu = styled.ul`
   grid-column: -1;
@@ -83,12 +84,7 @@ const AuxiliaryMenu = () => (
     <Item>
       <Link href="/me">
         <AuxiliaryMenuLink avatar>
-          {/* TODO: separate into user avatar component */}
-          <img
-            className="user-avatar user-avatar--32"
-            src="https://source.unsplash.com/collection/8470962/32x32"
-            alt="User avatar"
-          />
+          <UserAvatar size="32" />
         </AuxiliaryMenuLink>
       </Link>
       <UserMenu />
