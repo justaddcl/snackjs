@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AuxiliaryDropdownItemIcon /> renders and matches snapshot 1`] = `
+<AuxiliaryDropdownItemIcon
+  icon="chevron-down"
+>
+  <AuxiliaryDropdownItemIcon__StyledAuxiliaryDropdownItemIcon>
+    <div
+      className="AuxiliaryDropdownItemIcon__StyledAuxiliaryDropdownItemIcon-nj607m-0 lQYvK"
+    >
+      <i
+        className="fas fa-chevron-down"
+      />
+    </div>
+  </AuxiliaryDropdownItemIcon__StyledAuxiliaryDropdownItemIcon>
+</AuxiliaryDropdownItemIcon>
+`;
