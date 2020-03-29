@@ -147,9 +147,9 @@ const MobileNav = () => (
           Accounts settings
         </a>
       </li>
-      <li>{/* log out link */}</li>
+      <li>{/* TODO: add log out link */}</li>
       { /* else if user not logged in */ }
-      <li>{/* link to log in */}</li>
+      <li>{/* TODO: add log in link */}</li>
       { /* end if user logged in */ }
     </ul>
   </StyledMobileNav>
