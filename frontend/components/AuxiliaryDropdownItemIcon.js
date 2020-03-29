@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const StyledAuxiliaryDropdownItemIcon = styled.div`
@@ -14,5 +15,9 @@ const AuxiliaryDropdownItemIcon = ({ icon }) => (
     <i className={`fas fa-${icon}`} />
   </StyledAuxiliaryDropdownItemIcon>
 );
+
+AuxiliaryDropdownItemIcon.propTypes = {
+  icon: PropTypes.string.isRequired,
+};
 
 export default AuxiliaryDropdownItemIcon;
