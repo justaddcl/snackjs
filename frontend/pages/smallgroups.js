@@ -1,9 +1,13 @@
 import React from 'react';
+import styled from 'styled-components';
+import ContentContainer from '../components/styles/ContentContainer';
+
+const SmallGroupsPage = styled(ContentContainer)``;
 
 const Smallgroups = props => (
-  <div>
+  <SmallGroupsPage>
     <p>All the groups!</p>
-  </div>
+  </SmallGroupsPage>
 );
 
 export default Smallgroups;
