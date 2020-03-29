@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import theme from './styles/theme';
 
@@ -8,12 +9,18 @@ const StyledUserAvatar = styled.img`
   width: ${props => `${props.size}px` || '64px'};
 `;
 
-const UserAvatar = props => (
+const UserAvatar = ({ size }) => (
   <StyledUserAvatar
-    src={`https://source.unsplash.com/collection/8470962/${props.size}x${props.size}`}
+    src={`https://source.unsplash.com/collection/8470962/${size || '64'}x${size || '64'}`}
     alt="User avatar"
-    size={props.size}
+    width={size ? `${size}px` : '64px'}
+    height={size ? `${size}px` : '64px'}
+    size={size}
   />
 );
+
+UserAvatar.propTypes = {
+  size: PropTypes.number,
+};
 
 export default UserAvatar;
