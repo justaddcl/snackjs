@@ -1,10 +1,24 @@
 import Link from 'next/link';
+import Router from 'next/router';
+import NProgress from 'nprogress';
 import styled, { css } from 'styled-components';
 import Nav from './Nav';
 import MobileNav from './MobileNav';
 import AuxiliaryMenu from './AuxiliaryMenu';
 import ContentContainer from './styles/ContentContainer';
 import theme from './styles/theme';
+
+Router.onRouteChangeStart = () => {
+  NProgress.start();
+};
+
+Router.onRouteChangeComplete = () => {
+  NProgress.done();
+};
+
+Router.onRouteChangeError = () => {
+  NProgress.done();
+};
 
 const StyledHeader = styled.header`
   background-color: white;
