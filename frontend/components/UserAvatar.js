@@ -12,7 +12,8 @@ const UserAvatar = ({ size }) => (
   <StyledUserAvatar
     src={`https://source.unsplash.com/collection/8470962/${size || '64'}x${size || '64'}`}
     alt="User avatar"
-    size={props.size}
+    width={size ? `${size}px` : '64px'}
+    height={size ? `${size}px` : '64px'}
     size={size}
   />
 );
