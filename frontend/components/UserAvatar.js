@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import theme from './styles/theme';
 
@@ -17,5 +18,9 @@ const UserAvatar = ({ size }) => (
     size={size}
   />
 );
+
+UserAvatar.propTypes = {
+  size: PropTypes.number,
+};
 
 export default UserAvatar;
