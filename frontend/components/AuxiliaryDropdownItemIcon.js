@@ -9,9 +9,9 @@ const StyledAuxiliaryDropdownItemIcon = styled.div`
   width: 36px;
 `;
 
-const AuxiliaryDropdownItemIcon = props => (
+const AuxiliaryDropdownItemIcon = ({ icon }) => (
   <StyledAuxiliaryDropdownItemIcon>
-    <i className={`fas fa-${props.icon}`} />
+    <i className={`fas fa-${icon}`} />
   </StyledAuxiliaryDropdownItemIcon>
 );
 
