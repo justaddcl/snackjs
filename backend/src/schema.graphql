@@ -5,5 +5,14 @@ type Query {
 }
 
 type Mutation {
-  hi: String
+  createUser(data: CreateUserInput): User!
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+  password: String!
+  admin: Boolean!
+  dietaryRestrictions: String
+  favoriteSnack: String
 }
