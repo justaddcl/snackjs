@@ -1,4 +1,11 @@
 type User {
   id: ID! @id
   name: String!
+  email: String! @unique
+  password: String!
+  admin: Boolean!
+  dietaryRestrictions: String
+  favoriteSnack: String
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
