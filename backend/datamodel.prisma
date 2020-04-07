@@ -6,12 +6,14 @@ type User {
   admin: Boolean!
   dietaryRestrictions: String
   favoriteSnack: String
+  userRoles: [UserRole!]! @relation(name: "UserToUserRole", onDelete: CASCADE)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
 
 type UserRole {
   id: ID! @id
+  user: User! @relation(name: "UserToUserRole", onDelete: SET_NULL)
   type: UserRoleType!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
