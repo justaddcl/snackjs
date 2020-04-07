@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Mon Apr 06 2020 20:55:19 GMT-0500 (Central Daylight Time)
+# timestamp: Mon Apr 06 2020 21:04:08 GMT-0500 (Central Daylight Time)
 
 type AggregateUser {
   count: Int!
@@ -100,6 +100,7 @@ type User implements Node {
   admin: Boolean!
   dietaryRestrictions: String
   favoriteSnack: String
+  userRoles(where: UserRoleWhereInput, orderBy: UserRoleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserRole!]
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -115,6 +116,22 @@ type UserConnection {
 }
 
 input UserCreateInput {
+  id: ID
+  name: String!
+  email: String!
+  password: String!
+  admin: Boolean!
+  dietaryRestrictions: String
+  favoriteSnack: String
+  userRoles: UserRoleCreateManyWithoutUserInput
+}
+
+input UserCreateOneWithoutUserRolesInput {
+  create: UserCreateWithoutUserRolesInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutUserRolesInput {
   id: ID
   name: String!
   email: String!
@@ -168,6 +185,7 @@ type UserPreviousValues {
 
 type UserRole implements Node {
   id: ID!
+  user: User!
   type: UserRoleType!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -184,6 +202,17 @@ type UserRoleConnection {
 }
 
 input UserRoleCreateInput {
+  id: ID
+  type: UserRoleType!
+  user: UserCreateOneWithoutUserRolesInput!
+}
+
+input UserRoleCreateManyWithoutUserInput {
+  create: [UserRoleCreateWithoutUserInput!]
+  connect: [UserRoleWhereUniqueInput!]
+}
+
+input UserRoleCreateWithoutUserInput {
   id: ID
   type: UserRoleType!
 }
@@ -213,6 +242,111 @@ type UserRolePreviousValues {
   type: UserRoleType!
   createdAt: DateTime!
   updatedAt: DateTime!
+}
+
+input UserRoleScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [UserRoleScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [UserRoleScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserRoleScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  type: UserRoleType
+
+  """All values that are not equal to given value."""
+  type_not: UserRoleType
+
+  """All values that are contained in given list."""
+  type_in: [UserRoleType!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [UserRoleType!]
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
 }
 
 type UserRoleSubscriptionPayload {
@@ -265,10 +399,47 @@ enum UserRoleType {
 
 input UserRoleUpdateInput {
   type: UserRoleType
+  user: UserUpdateOneRequiredWithoutUserRolesInput
+}
+
+input UserRoleUpdateManyDataInput {
+  type: UserRoleType
 }
 
 input UserRoleUpdateManyMutationInput {
   type: UserRoleType
+}
+
+input UserRoleUpdateManyWithoutUserInput {
+  create: [UserRoleCreateWithoutUserInput!]
+  connect: [UserRoleWhereUniqueInput!]
+  set: [UserRoleWhereUniqueInput!]
+  disconnect: [UserRoleWhereUniqueInput!]
+  delete: [UserRoleWhereUniqueInput!]
+  update: [UserRoleUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [UserRoleUpdateManyWithWhereNestedInput!]
+  deleteMany: [UserRoleScalarWhereInput!]
+  upsert: [UserRoleUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input UserRoleUpdateManyWithWhereNestedInput {
+  where: UserRoleScalarWhereInput!
+  data: UserRoleUpdateManyDataInput!
+}
+
+input UserRoleUpdateWithoutUserDataInput {
+  type: UserRoleType
+}
+
+input UserRoleUpdateWithWhereUniqueWithoutUserInput {
+  where: UserRoleWhereUniqueInput!
+  data: UserRoleUpdateWithoutUserDataInput!
+}
+
+input UserRoleUpsertWithWhereUniqueWithoutUserInput {
+  where: UserRoleWhereUniqueInput!
+  update: UserRoleUpdateWithoutUserDataInput!
+  create: UserRoleCreateWithoutUserInput!
 }
 
 input UserRoleWhereInput {
@@ -374,6 +545,7 @@ input UserRoleWhereInput {
 
   """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
+  user: UserWhereInput
 }
 
 input UserRoleWhereUniqueInput {
@@ -426,6 +598,7 @@ input UserUpdateInput {
   admin: Boolean
   dietaryRestrictions: String
   favoriteSnack: String
+  userRoles: UserRoleUpdateManyWithoutUserInput
 }
 
 input UserUpdateManyMutationInput {
@@ -435,6 +608,27 @@ input UserUpdateManyMutationInput {
   admin: Boolean
   dietaryRestrictions: String
   favoriteSnack: String
+}
+
+input UserUpdateOneRequiredWithoutUserRolesInput {
+  create: UserCreateWithoutUserRolesInput
+  connect: UserWhereUniqueInput
+  update: UserUpdateWithoutUserRolesDataInput
+  upsert: UserUpsertWithoutUserRolesInput
+}
+
+input UserUpdateWithoutUserRolesDataInput {
+  name: String
+  email: String
+  password: String
+  admin: Boolean
+  dietaryRestrictions: String
+  favoriteSnack: String
+}
+
+input UserUpsertWithoutUserRolesInput {
+  update: UserUpdateWithoutUserRolesDataInput!
+  create: UserCreateWithoutUserRolesInput!
 }
 
 input UserWhereInput {
@@ -734,6 +928,9 @@ input UserWhereInput {
 
   """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
+  userRoles_every: UserRoleWhereInput
+  userRoles_some: UserRoleWhereInput
+  userRoles_none: UserRoleWhereInput
 }
 
 input UserWhereUniqueInput {
