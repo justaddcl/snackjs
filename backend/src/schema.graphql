@@ -11,6 +11,9 @@ type Mutation {
   createUser(data: CreateUserInput): User!
   createUserRole(data: CreateUserRoleInput): UserRole!
   createSmallGroup(data: CreateSmallGroupInput): SmallGroup!
+  createDiscipleshipCommunity(
+    data: CreateDiscipleshipCommunityInput
+  ): DiscipleshipCommunity!
 }
 
 input CreateUserInput {
@@ -30,4 +33,9 @@ input CreateUserRoleInput {
 
 input CreateSmallGroupInput {
   leader: ID!
+}
+
+input CreateDiscipleshipCommunityInput {
+  pastor: ID!
+  night: DiscipleshipCommunityNight!
 }
