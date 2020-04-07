@@ -16,3 +16,12 @@ type UserRole {
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
+
+enum UserRoleType {
+  ADMIN
+  DISCIPLESHIP_COMMUNITY_PASTOR
+  SMALL_GROUP_LEADER
+  SMALL_GROUP_COORDINATOR
+  DISCIPLESHIP_COMMUNITY_COORDINATOR
+  SMALL_GROUP_MEMBER
+}
