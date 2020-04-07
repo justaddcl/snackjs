@@ -15,6 +15,7 @@ type UserRole {
   id: ID! @id
   user: User! @relation(name: "UserToUserRole", onDelete: SET_NULL)
   type: UserRoleType!
+  """TODO: connect to small group"""
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
