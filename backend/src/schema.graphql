@@ -8,6 +8,7 @@ type Query {
 
 type Mutation {
   createUser(data: CreateUserInput): User!
+  createSmallGroup(data: CreateSmallGroupInput): SmallGroup!
 }
 
 input CreateUserInput {
@@ -17,4 +18,8 @@ input CreateUserInput {
   admin: Boolean!
   dietaryRestrictions: String
   favoriteSnack: String
+}
+
+input CreateSmallGroupInput {
+  leader: ID!
 }
