@@ -16,7 +16,7 @@ type UserRole {
   id: ID! @id
   user: User! @relation(name: "UserToUserRole", onDelete: SET_NULL)
   type: UserRoleType!
-  smallGroup: SmallGroup! @relation(name: "SmallGroupToUserRole", onDelete: SET_NULL)
+  smallGroup: SmallGroup @relation(name: "SmallGroupToUserRole", onDelete: SET_NULL)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
