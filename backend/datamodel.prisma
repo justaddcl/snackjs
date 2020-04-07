@@ -40,6 +40,19 @@ type DiscipleshipCommunity {
   updatedAt: DateTime! @updatedAt
 }
 
+""" TODO: add gatherable to event """
+type Event {
+  id: ID! @id
+  type: EventType!
+  name: String!
+  description: String!
+  date: DateTime!
+  startTime: DateTime
+  endTime: DateTime
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
 enum UserRoleType {
   ADMIN
   DISCIPLESHIP_COMMUNITY_PASTOR
@@ -55,4 +68,11 @@ enum DiscipleshipCommunityNight {
   WEDNESDAY
   THURSDAY
   FRIDAY
+}
+
+enum EventType {
+  SMALL_GROUP
+  DISCIPLESHIP_COMMUNITY
+  PARTY
+  OTHER
 }
