@@ -1,5 +1,9 @@
 # source: http://localhost:4466
-# timestamp: Mon Apr 06 2020 22:52:20 GMT-0500 (Central Daylight Time)
+# timestamp: Mon Apr 06 2020 23:13:44 GMT-0500 (Central Daylight Time)
+
+type AggregateDiscipleshipCommunity {
+  count: Int!
+}
 
 type AggregateSmallGroup {
   count: Int!
@@ -20,6 +24,412 @@ type BatchPayload {
 
 scalar DateTime
 
+type DiscipleshipCommunity implements Node {
+  id: ID!
+  pastor: User!
+  night: DiscipleshipCommunityNight!
+  smallGroups(where: SmallGroupWhereInput, orderBy: SmallGroupOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SmallGroup!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A connection to a list of items."""
+type DiscipleshipCommunityConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [DiscipleshipCommunityEdge]!
+  aggregate: AggregateDiscipleshipCommunity!
+}
+
+input DiscipleshipCommunityCreateInput {
+  id: ID
+  night: DiscipleshipCommunityNight!
+  pastor: UserCreateOneWithoutLeadsDiscipleshipCommunitiesInput!
+  smallGroups: SmallGroupCreateManyWithoutDiscipleshipCommunityInput
+}
+
+input DiscipleshipCommunityCreateManyWithoutPastorInput {
+  create: [DiscipleshipCommunityCreateWithoutPastorInput!]
+  connect: [DiscipleshipCommunityWhereUniqueInput!]
+}
+
+input DiscipleshipCommunityCreateOneWithoutSmallGroupsInput {
+  create: DiscipleshipCommunityCreateWithoutSmallGroupsInput
+  connect: DiscipleshipCommunityWhereUniqueInput
+}
+
+input DiscipleshipCommunityCreateWithoutPastorInput {
+  id: ID
+  night: DiscipleshipCommunityNight!
+  smallGroups: SmallGroupCreateManyWithoutDiscipleshipCommunityInput
+}
+
+input DiscipleshipCommunityCreateWithoutSmallGroupsInput {
+  id: ID
+  night: DiscipleshipCommunityNight!
+  pastor: UserCreateOneWithoutLeadsDiscipleshipCommunitiesInput!
+}
+
+"""An edge in a connection."""
+type DiscipleshipCommunityEdge {
+  """The item at the end of the edge."""
+  node: DiscipleshipCommunity!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum DiscipleshipCommunityNight {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+}
+
+enum DiscipleshipCommunityOrderByInput {
+  id_ASC
+  id_DESC
+  night_ASC
+  night_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type DiscipleshipCommunityPreviousValues {
+  id: ID!
+  night: DiscipleshipCommunityNight!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input DiscipleshipCommunityScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [DiscipleshipCommunityScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [DiscipleshipCommunityScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [DiscipleshipCommunityScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  night: DiscipleshipCommunityNight
+
+  """All values that are not equal to given value."""
+  night_not: DiscipleshipCommunityNight
+
+  """All values that are contained in given list."""
+  night_in: [DiscipleshipCommunityNight!]
+
+  """All values that are not contained in given list."""
+  night_not_in: [DiscipleshipCommunityNight!]
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+}
+
+type DiscipleshipCommunitySubscriptionPayload {
+  mutation: MutationType!
+  node: DiscipleshipCommunity
+  updatedFields: [String!]
+  previousValues: DiscipleshipCommunityPreviousValues
+}
+
+input DiscipleshipCommunitySubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [DiscipleshipCommunitySubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [DiscipleshipCommunitySubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [DiscipleshipCommunitySubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: DiscipleshipCommunityWhereInput
+}
+
+input DiscipleshipCommunityUpdateInput {
+  night: DiscipleshipCommunityNight
+  pastor: UserUpdateOneRequiredWithoutLeadsDiscipleshipCommunitiesInput
+  smallGroups: SmallGroupUpdateManyWithoutDiscipleshipCommunityInput
+}
+
+input DiscipleshipCommunityUpdateManyDataInput {
+  night: DiscipleshipCommunityNight
+}
+
+input DiscipleshipCommunityUpdateManyMutationInput {
+  night: DiscipleshipCommunityNight
+}
+
+input DiscipleshipCommunityUpdateManyWithoutPastorInput {
+  create: [DiscipleshipCommunityCreateWithoutPastorInput!]
+  connect: [DiscipleshipCommunityWhereUniqueInput!]
+  set: [DiscipleshipCommunityWhereUniqueInput!]
+  disconnect: [DiscipleshipCommunityWhereUniqueInput!]
+  delete: [DiscipleshipCommunityWhereUniqueInput!]
+  update: [DiscipleshipCommunityUpdateWithWhereUniqueWithoutPastorInput!]
+  updateMany: [DiscipleshipCommunityUpdateManyWithWhereNestedInput!]
+  deleteMany: [DiscipleshipCommunityScalarWhereInput!]
+  upsert: [DiscipleshipCommunityUpsertWithWhereUniqueWithoutPastorInput!]
+}
+
+input DiscipleshipCommunityUpdateManyWithWhereNestedInput {
+  where: DiscipleshipCommunityScalarWhereInput!
+  data: DiscipleshipCommunityUpdateManyDataInput!
+}
+
+input DiscipleshipCommunityUpdateOneWithoutSmallGroupsInput {
+  create: DiscipleshipCommunityCreateWithoutSmallGroupsInput
+  connect: DiscipleshipCommunityWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: DiscipleshipCommunityUpdateWithoutSmallGroupsDataInput
+  upsert: DiscipleshipCommunityUpsertWithoutSmallGroupsInput
+}
+
+input DiscipleshipCommunityUpdateWithoutPastorDataInput {
+  night: DiscipleshipCommunityNight
+  smallGroups: SmallGroupUpdateManyWithoutDiscipleshipCommunityInput
+}
+
+input DiscipleshipCommunityUpdateWithoutSmallGroupsDataInput {
+  night: DiscipleshipCommunityNight
+  pastor: UserUpdateOneRequiredWithoutLeadsDiscipleshipCommunitiesInput
+}
+
+input DiscipleshipCommunityUpdateWithWhereUniqueWithoutPastorInput {
+  where: DiscipleshipCommunityWhereUniqueInput!
+  data: DiscipleshipCommunityUpdateWithoutPastorDataInput!
+}
+
+input DiscipleshipCommunityUpsertWithoutSmallGroupsInput {
+  update: DiscipleshipCommunityUpdateWithoutSmallGroupsDataInput!
+  create: DiscipleshipCommunityCreateWithoutSmallGroupsInput!
+}
+
+input DiscipleshipCommunityUpsertWithWhereUniqueWithoutPastorInput {
+  where: DiscipleshipCommunityWhereUniqueInput!
+  update: DiscipleshipCommunityUpdateWithoutPastorDataInput!
+  create: DiscipleshipCommunityCreateWithoutPastorInput!
+}
+
+input DiscipleshipCommunityWhereInput {
+  """Logical AND on all given filters."""
+  AND: [DiscipleshipCommunityWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [DiscipleshipCommunityWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [DiscipleshipCommunityWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  night: DiscipleshipCommunityNight
+
+  """All values that are not equal to given value."""
+  night_not: DiscipleshipCommunityNight
+
+  """All values that are contained in given list."""
+  night_in: [DiscipleshipCommunityNight!]
+
+  """All values that are not contained in given list."""
+  night_not_in: [DiscipleshipCommunityNight!]
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  pastor: UserWhereInput
+  smallGroups_every: SmallGroupWhereInput
+  smallGroups_some: SmallGroupWhereInput
+  smallGroups_none: SmallGroupWhereInput
+}
+
+input DiscipleshipCommunityWhereUniqueInput {
+  id: ID
+}
+
 """Raw JSON value"""
 scalar Json
 
@@ -33,20 +443,26 @@ type Mutation {
   createUser(data: UserCreateInput!): User!
   createUserRole(data: UserRoleCreateInput!): UserRole!
   createSmallGroup(data: SmallGroupCreateInput!): SmallGroup!
+  createDiscipleshipCommunity(data: DiscipleshipCommunityCreateInput!): DiscipleshipCommunity!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateUserRole(data: UserRoleUpdateInput!, where: UserRoleWhereUniqueInput!): UserRole
   updateSmallGroup(data: SmallGroupUpdateInput!, where: SmallGroupWhereUniqueInput!): SmallGroup
+  updateDiscipleshipCommunity(data: DiscipleshipCommunityUpdateInput!, where: DiscipleshipCommunityWhereUniqueInput!): DiscipleshipCommunity
   deleteUser(where: UserWhereUniqueInput!): User
   deleteUserRole(where: UserRoleWhereUniqueInput!): UserRole
   deleteSmallGroup(where: SmallGroupWhereUniqueInput!): SmallGroup
+  deleteDiscipleshipCommunity(where: DiscipleshipCommunityWhereUniqueInput!): DiscipleshipCommunity
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertUserRole(where: UserRoleWhereUniqueInput!, create: UserRoleCreateInput!, update: UserRoleUpdateInput!): UserRole!
   upsertSmallGroup(where: SmallGroupWhereUniqueInput!, create: SmallGroupCreateInput!, update: SmallGroupUpdateInput!): SmallGroup!
+  upsertDiscipleshipCommunity(where: DiscipleshipCommunityWhereUniqueInput!, create: DiscipleshipCommunityCreateInput!, update: DiscipleshipCommunityUpdateInput!): DiscipleshipCommunity!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   updateManyUserRoles(data: UserRoleUpdateManyMutationInput!, where: UserRoleWhereInput): BatchPayload!
+  updateManyDiscipleshipCommunities(data: DiscipleshipCommunityUpdateManyMutationInput!, where: DiscipleshipCommunityWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyUserRoles(where: UserRoleWhereInput): BatchPayload!
   deleteManySmallGroups(where: SmallGroupWhereInput): BatchPayload!
+  deleteManyDiscipleshipCommunities(where: DiscipleshipCommunityWhereInput): BatchPayload!
   executeRaw(database: PrismaDatabase, query: String!): Json!
 }
 
@@ -85,12 +501,15 @@ type Query {
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   userRoles(where: UserRoleWhereInput, orderBy: UserRoleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserRole]!
   smallGroups(where: SmallGroupWhereInput, orderBy: SmallGroupOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SmallGroup]!
+  discipleshipCommunities(where: DiscipleshipCommunityWhereInput, orderBy: DiscipleshipCommunityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [DiscipleshipCommunity]!
   user(where: UserWhereUniqueInput!): User
   userRole(where: UserRoleWhereUniqueInput!): UserRole
   smallGroup(where: SmallGroupWhereUniqueInput!): SmallGroup
+  discipleshipCommunity(where: DiscipleshipCommunityWhereUniqueInput!): DiscipleshipCommunity
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   userRolesConnection(where: UserRoleWhereInput, orderBy: UserRoleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserRoleConnection!
   smallGroupsConnection(where: SmallGroupWhereInput, orderBy: SmallGroupOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SmallGroupConnection!
+  discipleshipCommunitiesConnection(where: DiscipleshipCommunityWhereInput, orderBy: DiscipleshipCommunityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): DiscipleshipCommunityConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -102,6 +521,7 @@ type Query {
 type SmallGroup implements Node {
   id: ID!
   leader: User!
+  discipleshipCommunity: DiscipleshipCommunity
   members(where: UserRoleWhereInput, orderBy: UserRoleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserRole!]
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -120,7 +540,13 @@ type SmallGroupConnection {
 input SmallGroupCreateInput {
   id: ID
   leader: UserCreateOneWithoutLeadsSmallGroupsInput!
+  discipleshipCommunity: DiscipleshipCommunityCreateOneWithoutSmallGroupsInput
   members: UserRoleCreateManyWithoutSmallGroupInput
+}
+
+input SmallGroupCreateManyWithoutDiscipleshipCommunityInput {
+  create: [SmallGroupCreateWithoutDiscipleshipCommunityInput!]
+  connect: [SmallGroupWhereUniqueInput!]
 }
 
 input SmallGroupCreateManyWithoutLeaderInput {
@@ -133,14 +559,22 @@ input SmallGroupCreateOneWithoutMembersInput {
   connect: SmallGroupWhereUniqueInput
 }
 
+input SmallGroupCreateWithoutDiscipleshipCommunityInput {
+  id: ID
+  leader: UserCreateOneWithoutLeadsSmallGroupsInput!
+  members: UserRoleCreateManyWithoutSmallGroupInput
+}
+
 input SmallGroupCreateWithoutLeaderInput {
   id: ID
+  discipleshipCommunity: DiscipleshipCommunityCreateOneWithoutSmallGroupsInput
   members: UserRoleCreateManyWithoutSmallGroupInput
 }
 
 input SmallGroupCreateWithoutMembersInput {
   id: ID
   leader: UserCreateOneWithoutLeadsSmallGroupsInput!
+  discipleshipCommunity: DiscipleshipCommunityCreateOneWithoutSmallGroupsInput
 }
 
 """An edge in a connection."""
@@ -303,7 +737,19 @@ input SmallGroupSubscriptionWhereInput {
 
 input SmallGroupUpdateInput {
   leader: UserUpdateOneRequiredWithoutLeadsSmallGroupsInput
+  discipleshipCommunity: DiscipleshipCommunityUpdateOneWithoutSmallGroupsInput
   members: UserRoleUpdateManyWithoutSmallGroupInput
+}
+
+input SmallGroupUpdateManyWithoutDiscipleshipCommunityInput {
+  create: [SmallGroupCreateWithoutDiscipleshipCommunityInput!]
+  connect: [SmallGroupWhereUniqueInput!]
+  set: [SmallGroupWhereUniqueInput!]
+  disconnect: [SmallGroupWhereUniqueInput!]
+  delete: [SmallGroupWhereUniqueInput!]
+  update: [SmallGroupUpdateWithWhereUniqueWithoutDiscipleshipCommunityInput!]
+  deleteMany: [SmallGroupScalarWhereInput!]
+  upsert: [SmallGroupUpsertWithWhereUniqueWithoutDiscipleshipCommunityInput!]
 }
 
 input SmallGroupUpdateManyWithoutLeaderInput {
@@ -317,19 +763,33 @@ input SmallGroupUpdateManyWithoutLeaderInput {
   upsert: [SmallGroupUpsertWithWhereUniqueWithoutLeaderInput!]
 }
 
-input SmallGroupUpdateOneRequiredWithoutMembersInput {
+input SmallGroupUpdateOneWithoutMembersInput {
   create: SmallGroupCreateWithoutMembersInput
   connect: SmallGroupWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
   update: SmallGroupUpdateWithoutMembersDataInput
   upsert: SmallGroupUpsertWithoutMembersInput
 }
 
+input SmallGroupUpdateWithoutDiscipleshipCommunityDataInput {
+  leader: UserUpdateOneRequiredWithoutLeadsSmallGroupsInput
+  members: UserRoleUpdateManyWithoutSmallGroupInput
+}
+
 input SmallGroupUpdateWithoutLeaderDataInput {
+  discipleshipCommunity: DiscipleshipCommunityUpdateOneWithoutSmallGroupsInput
   members: UserRoleUpdateManyWithoutSmallGroupInput
 }
 
 input SmallGroupUpdateWithoutMembersDataInput {
   leader: UserUpdateOneRequiredWithoutLeadsSmallGroupsInput
+  discipleshipCommunity: DiscipleshipCommunityUpdateOneWithoutSmallGroupsInput
+}
+
+input SmallGroupUpdateWithWhereUniqueWithoutDiscipleshipCommunityInput {
+  where: SmallGroupWhereUniqueInput!
+  data: SmallGroupUpdateWithoutDiscipleshipCommunityDataInput!
 }
 
 input SmallGroupUpdateWithWhereUniqueWithoutLeaderInput {
@@ -340,6 +800,12 @@ input SmallGroupUpdateWithWhereUniqueWithoutLeaderInput {
 input SmallGroupUpsertWithoutMembersInput {
   update: SmallGroupUpdateWithoutMembersDataInput!
   create: SmallGroupCreateWithoutMembersInput!
+}
+
+input SmallGroupUpsertWithWhereUniqueWithoutDiscipleshipCommunityInput {
+  where: SmallGroupWhereUniqueInput!
+  update: SmallGroupUpdateWithoutDiscipleshipCommunityDataInput!
+  create: SmallGroupCreateWithoutDiscipleshipCommunityInput!
 }
 
 input SmallGroupUpsertWithWhereUniqueWithoutLeaderInput {
@@ -442,6 +908,7 @@ input SmallGroupWhereInput {
   """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
   leader: UserWhereInput
+  discipleshipCommunity: DiscipleshipCommunityWhereInput
   members_every: UserRoleWhereInput
   members_some: UserRoleWhereInput
   members_none: UserRoleWhereInput
@@ -455,6 +922,7 @@ type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   userRole(where: UserRoleSubscriptionWhereInput): UserRoleSubscriptionPayload
   smallGroup(where: SmallGroupSubscriptionWhereInput): SmallGroupSubscriptionPayload
+  discipleshipCommunity(where: DiscipleshipCommunitySubscriptionWhereInput): DiscipleshipCommunitySubscriptionPayload
 }
 
 type User implements Node {
@@ -467,6 +935,7 @@ type User implements Node {
   favoriteSnack: String
   userRoles(where: UserRoleWhereInput, orderBy: UserRoleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserRole!]
   leadsSmallGroups(where: SmallGroupWhereInput, orderBy: SmallGroupOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SmallGroup!]
+  leadsDiscipleshipCommunities(where: DiscipleshipCommunityWhereInput, orderBy: DiscipleshipCommunityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [DiscipleshipCommunity!]
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -491,6 +960,12 @@ input UserCreateInput {
   favoriteSnack: String
   userRoles: UserRoleCreateManyWithoutUserInput
   leadsSmallGroups: SmallGroupCreateManyWithoutLeaderInput
+  leadsDiscipleshipCommunities: DiscipleshipCommunityCreateManyWithoutPastorInput
+}
+
+input UserCreateOneWithoutLeadsDiscipleshipCommunitiesInput {
+  create: UserCreateWithoutLeadsDiscipleshipCommunitiesInput
+  connect: UserWhereUniqueInput
 }
 
 input UserCreateOneWithoutLeadsSmallGroupsInput {
@@ -503,6 +978,18 @@ input UserCreateOneWithoutUserRolesInput {
   connect: UserWhereUniqueInput
 }
 
+input UserCreateWithoutLeadsDiscipleshipCommunitiesInput {
+  id: ID
+  name: String!
+  email: String!
+  password: String!
+  admin: Boolean!
+  dietaryRestrictions: String
+  favoriteSnack: String
+  userRoles: UserRoleCreateManyWithoutUserInput
+  leadsSmallGroups: SmallGroupCreateManyWithoutLeaderInput
+}
+
 input UserCreateWithoutLeadsSmallGroupsInput {
   id: ID
   name: String!
@@ -512,6 +999,7 @@ input UserCreateWithoutLeadsSmallGroupsInput {
   dietaryRestrictions: String
   favoriteSnack: String
   userRoles: UserRoleCreateManyWithoutUserInput
+  leadsDiscipleshipCommunities: DiscipleshipCommunityCreateManyWithoutPastorInput
 }
 
 input UserCreateWithoutUserRolesInput {
@@ -523,6 +1011,7 @@ input UserCreateWithoutUserRolesInput {
   dietaryRestrictions: String
   favoriteSnack: String
   leadsSmallGroups: SmallGroupCreateManyWithoutLeaderInput
+  leadsDiscipleshipCommunities: DiscipleshipCommunityCreateManyWithoutPastorInput
 }
 
 """An edge in a connection."""
@@ -571,7 +1060,7 @@ type UserRole implements Node {
   id: ID!
   user: User!
   type: UserRoleType!
-  smallGroup: SmallGroup!
+  smallGroup: SmallGroup
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -590,7 +1079,7 @@ input UserRoleCreateInput {
   id: ID
   type: UserRoleType!
   user: UserCreateOneWithoutUserRolesInput!
-  smallGroup: SmallGroupCreateOneWithoutMembersInput!
+  smallGroup: SmallGroupCreateOneWithoutMembersInput
 }
 
 input UserRoleCreateManyWithoutSmallGroupInput {
@@ -612,7 +1101,7 @@ input UserRoleCreateWithoutSmallGroupInput {
 input UserRoleCreateWithoutUserInput {
   id: ID
   type: UserRoleType!
-  smallGroup: SmallGroupCreateOneWithoutMembersInput!
+  smallGroup: SmallGroupCreateOneWithoutMembersInput
 }
 
 """An edge in a connection."""
@@ -798,7 +1287,7 @@ enum UserRoleType {
 input UserRoleUpdateInput {
   type: UserRoleType
   user: UserUpdateOneRequiredWithoutUserRolesInput
-  smallGroup: SmallGroupUpdateOneRequiredWithoutMembersInput
+  smallGroup: SmallGroupUpdateOneWithoutMembersInput
 }
 
 input UserRoleUpdateManyDataInput {
@@ -845,7 +1334,7 @@ input UserRoleUpdateWithoutSmallGroupDataInput {
 
 input UserRoleUpdateWithoutUserDataInput {
   type: UserRoleType
-  smallGroup: SmallGroupUpdateOneRequiredWithoutMembersInput
+  smallGroup: SmallGroupUpdateOneWithoutMembersInput
 }
 
 input UserRoleUpdateWithWhereUniqueWithoutSmallGroupInput {
@@ -1029,6 +1518,7 @@ input UserUpdateInput {
   favoriteSnack: String
   userRoles: UserRoleUpdateManyWithoutUserInput
   leadsSmallGroups: SmallGroupUpdateManyWithoutLeaderInput
+  leadsDiscipleshipCommunities: DiscipleshipCommunityUpdateManyWithoutPastorInput
 }
 
 input UserUpdateManyMutationInput {
@@ -1038,6 +1528,13 @@ input UserUpdateManyMutationInput {
   admin: Boolean
   dietaryRestrictions: String
   favoriteSnack: String
+}
+
+input UserUpdateOneRequiredWithoutLeadsDiscipleshipCommunitiesInput {
+  create: UserCreateWithoutLeadsDiscipleshipCommunitiesInput
+  connect: UserWhereUniqueInput
+  update: UserUpdateWithoutLeadsDiscipleshipCommunitiesDataInput
+  upsert: UserUpsertWithoutLeadsDiscipleshipCommunitiesInput
 }
 
 input UserUpdateOneRequiredWithoutLeadsSmallGroupsInput {
@@ -1054,6 +1551,17 @@ input UserUpdateOneRequiredWithoutUserRolesInput {
   upsert: UserUpsertWithoutUserRolesInput
 }
 
+input UserUpdateWithoutLeadsDiscipleshipCommunitiesDataInput {
+  name: String
+  email: String
+  password: String
+  admin: Boolean
+  dietaryRestrictions: String
+  favoriteSnack: String
+  userRoles: UserRoleUpdateManyWithoutUserInput
+  leadsSmallGroups: SmallGroupUpdateManyWithoutLeaderInput
+}
+
 input UserUpdateWithoutLeadsSmallGroupsDataInput {
   name: String
   email: String
@@ -1062,6 +1570,7 @@ input UserUpdateWithoutLeadsSmallGroupsDataInput {
   dietaryRestrictions: String
   favoriteSnack: String
   userRoles: UserRoleUpdateManyWithoutUserInput
+  leadsDiscipleshipCommunities: DiscipleshipCommunityUpdateManyWithoutPastorInput
 }
 
 input UserUpdateWithoutUserRolesDataInput {
@@ -1072,6 +1581,12 @@ input UserUpdateWithoutUserRolesDataInput {
   dietaryRestrictions: String
   favoriteSnack: String
   leadsSmallGroups: SmallGroupUpdateManyWithoutLeaderInput
+  leadsDiscipleshipCommunities: DiscipleshipCommunityUpdateManyWithoutPastorInput
+}
+
+input UserUpsertWithoutLeadsDiscipleshipCommunitiesInput {
+  update: UserUpdateWithoutLeadsDiscipleshipCommunitiesDataInput!
+  create: UserCreateWithoutLeadsDiscipleshipCommunitiesInput!
 }
 
 input UserUpsertWithoutLeadsSmallGroupsInput {
@@ -1387,6 +1902,9 @@ input UserWhereInput {
   leadsSmallGroups_every: SmallGroupWhereInput
   leadsSmallGroups_some: SmallGroupWhereInput
   leadsSmallGroups_none: SmallGroupWhereInput
+  leadsDiscipleshipCommunities_every: DiscipleshipCommunityWhereInput
+  leadsDiscipleshipCommunities_some: DiscipleshipCommunityWhereInput
+  leadsDiscipleshipCommunities_none: DiscipleshipCommunityWhereInput
 }
 
 input UserWhereUniqueInput {
