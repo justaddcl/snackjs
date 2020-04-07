@@ -2,6 +2,7 @@
 
 type Query {
   users: [User!]!
+  userRoles: [UserRole!]!
 }
 
 type Mutation {
