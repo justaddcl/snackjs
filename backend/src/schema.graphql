@@ -8,6 +8,7 @@ type Query {
 
 type Mutation {
   createUser(data: CreateUserInput): User!
+  createUserRole(data: CreateUserRoleInput): UserRole!
   createSmallGroup(data: CreateSmallGroupInput): SmallGroup!
 }
 
@@ -18,6 +19,12 @@ input CreateUserInput {
   admin: Boolean!
   dietaryRestrictions: String
   favoriteSnack: String
+}
+
+input CreateUserRoleInput {
+  type: UserRoleType!
+  user: ID!
+  smallGroup: ID!
 }
 
 input CreateSmallGroupInput {
