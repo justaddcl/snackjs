@@ -3,6 +3,7 @@
 type Query {
   users: [User!]!
   userRoles: [UserRole!]!
+  smallGroups: [SmallGroup!]!
 }
 
 type Mutation {
