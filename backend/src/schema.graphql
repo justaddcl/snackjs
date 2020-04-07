@@ -4,6 +4,7 @@ type Query {
   users: [User!]!
   userRoles: [UserRole!]!
   smallGroups: [SmallGroup!]!
+  discipleshipCommunities: [DiscipleshipCommunity!]!
 }
 
 type Mutation {
