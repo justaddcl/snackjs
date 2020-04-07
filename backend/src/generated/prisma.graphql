@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Mon Apr 06 2020 22:21:17 GMT-0500 (Central Daylight Time)
+# timestamp: Mon Apr 06 2020 22:52:20 GMT-0500 (Central Daylight Time)
 
 type AggregateSmallGroup {
   count: Int!
@@ -102,6 +102,7 @@ type Query {
 type SmallGroup implements Node {
   id: ID!
   leader: User!
+  members(where: UserRoleWhereInput, orderBy: UserRoleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserRole!]
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -119,6 +120,7 @@ type SmallGroupConnection {
 input SmallGroupCreateInput {
   id: ID
   leader: UserCreateOneWithoutLeadsSmallGroupsInput!
+  members: UserRoleCreateManyWithoutSmallGroupInput
 }
 
 input SmallGroupCreateManyWithoutLeaderInput {
@@ -126,8 +128,19 @@ input SmallGroupCreateManyWithoutLeaderInput {
   connect: [SmallGroupWhereUniqueInput!]
 }
 
+input SmallGroupCreateOneWithoutMembersInput {
+  create: SmallGroupCreateWithoutMembersInput
+  connect: SmallGroupWhereUniqueInput
+}
+
 input SmallGroupCreateWithoutLeaderInput {
   id: ID
+  members: UserRoleCreateManyWithoutSmallGroupInput
+}
+
+input SmallGroupCreateWithoutMembersInput {
+  id: ID
+  leader: UserCreateOneWithoutLeadsSmallGroupsInput!
 }
 
 """An edge in a connection."""
@@ -290,6 +303,7 @@ input SmallGroupSubscriptionWhereInput {
 
 input SmallGroupUpdateInput {
   leader: UserUpdateOneRequiredWithoutLeadsSmallGroupsInput
+  members: UserRoleUpdateManyWithoutSmallGroupInput
 }
 
 input SmallGroupUpdateManyWithoutLeaderInput {
@@ -298,7 +312,40 @@ input SmallGroupUpdateManyWithoutLeaderInput {
   set: [SmallGroupWhereUniqueInput!]
   disconnect: [SmallGroupWhereUniqueInput!]
   delete: [SmallGroupWhereUniqueInput!]
+  update: [SmallGroupUpdateWithWhereUniqueWithoutLeaderInput!]
   deleteMany: [SmallGroupScalarWhereInput!]
+  upsert: [SmallGroupUpsertWithWhereUniqueWithoutLeaderInput!]
+}
+
+input SmallGroupUpdateOneRequiredWithoutMembersInput {
+  create: SmallGroupCreateWithoutMembersInput
+  connect: SmallGroupWhereUniqueInput
+  update: SmallGroupUpdateWithoutMembersDataInput
+  upsert: SmallGroupUpsertWithoutMembersInput
+}
+
+input SmallGroupUpdateWithoutLeaderDataInput {
+  members: UserRoleUpdateManyWithoutSmallGroupInput
+}
+
+input SmallGroupUpdateWithoutMembersDataInput {
+  leader: UserUpdateOneRequiredWithoutLeadsSmallGroupsInput
+}
+
+input SmallGroupUpdateWithWhereUniqueWithoutLeaderInput {
+  where: SmallGroupWhereUniqueInput!
+  data: SmallGroupUpdateWithoutLeaderDataInput!
+}
+
+input SmallGroupUpsertWithoutMembersInput {
+  update: SmallGroupUpdateWithoutMembersDataInput!
+  create: SmallGroupCreateWithoutMembersInput!
+}
+
+input SmallGroupUpsertWithWhereUniqueWithoutLeaderInput {
+  where: SmallGroupWhereUniqueInput!
+  update: SmallGroupUpdateWithoutLeaderDataInput!
+  create: SmallGroupCreateWithoutLeaderInput!
 }
 
 input SmallGroupWhereInput {
@@ -395,6 +442,9 @@ input SmallGroupWhereInput {
   """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
   leader: UserWhereInput
+  members_every: UserRoleWhereInput
+  members_some: UserRoleWhereInput
+  members_none: UserRoleWhereInput
 }
 
 input SmallGroupWhereUniqueInput {
@@ -521,6 +571,7 @@ type UserRole implements Node {
   id: ID!
   user: User!
   type: UserRoleType!
+  smallGroup: SmallGroup!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -539,6 +590,12 @@ input UserRoleCreateInput {
   id: ID
   type: UserRoleType!
   user: UserCreateOneWithoutUserRolesInput!
+  smallGroup: SmallGroupCreateOneWithoutMembersInput!
+}
+
+input UserRoleCreateManyWithoutSmallGroupInput {
+  create: [UserRoleCreateWithoutSmallGroupInput!]
+  connect: [UserRoleWhereUniqueInput!]
 }
 
 input UserRoleCreateManyWithoutUserInput {
@@ -546,9 +603,16 @@ input UserRoleCreateManyWithoutUserInput {
   connect: [UserRoleWhereUniqueInput!]
 }
 
+input UserRoleCreateWithoutSmallGroupInput {
+  id: ID
+  type: UserRoleType!
+  user: UserCreateOneWithoutUserRolesInput!
+}
+
 input UserRoleCreateWithoutUserInput {
   id: ID
   type: UserRoleType!
+  smallGroup: SmallGroupCreateOneWithoutMembersInput!
 }
 
 """An edge in a connection."""
@@ -734,6 +798,7 @@ enum UserRoleType {
 input UserRoleUpdateInput {
   type: UserRoleType
   user: UserUpdateOneRequiredWithoutUserRolesInput
+  smallGroup: SmallGroupUpdateOneRequiredWithoutMembersInput
 }
 
 input UserRoleUpdateManyDataInput {
@@ -742,6 +807,18 @@ input UserRoleUpdateManyDataInput {
 
 input UserRoleUpdateManyMutationInput {
   type: UserRoleType
+}
+
+input UserRoleUpdateManyWithoutSmallGroupInput {
+  create: [UserRoleCreateWithoutSmallGroupInput!]
+  connect: [UserRoleWhereUniqueInput!]
+  set: [UserRoleWhereUniqueInput!]
+  disconnect: [UserRoleWhereUniqueInput!]
+  delete: [UserRoleWhereUniqueInput!]
+  update: [UserRoleUpdateWithWhereUniqueWithoutSmallGroupInput!]
+  updateMany: [UserRoleUpdateManyWithWhereNestedInput!]
+  deleteMany: [UserRoleScalarWhereInput!]
+  upsert: [UserRoleUpsertWithWhereUniqueWithoutSmallGroupInput!]
 }
 
 input UserRoleUpdateManyWithoutUserInput {
@@ -761,13 +838,30 @@ input UserRoleUpdateManyWithWhereNestedInput {
   data: UserRoleUpdateManyDataInput!
 }
 
+input UserRoleUpdateWithoutSmallGroupDataInput {
+  type: UserRoleType
+  user: UserUpdateOneRequiredWithoutUserRolesInput
+}
+
 input UserRoleUpdateWithoutUserDataInput {
   type: UserRoleType
+  smallGroup: SmallGroupUpdateOneRequiredWithoutMembersInput
+}
+
+input UserRoleUpdateWithWhereUniqueWithoutSmallGroupInput {
+  where: UserRoleWhereUniqueInput!
+  data: UserRoleUpdateWithoutSmallGroupDataInput!
 }
 
 input UserRoleUpdateWithWhereUniqueWithoutUserInput {
   where: UserRoleWhereUniqueInput!
   data: UserRoleUpdateWithoutUserDataInput!
+}
+
+input UserRoleUpsertWithWhereUniqueWithoutSmallGroupInput {
+  where: UserRoleWhereUniqueInput!
+  update: UserRoleUpdateWithoutSmallGroupDataInput!
+  create: UserRoleCreateWithoutSmallGroupInput!
 }
 
 input UserRoleUpsertWithWhereUniqueWithoutUserInput {
@@ -880,6 +974,7 @@ input UserRoleWhereInput {
   """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
   user: UserWhereInput
+  smallGroup: SmallGroupWhereInput
 }
 
 input UserRoleWhereUniqueInput {
