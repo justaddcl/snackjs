@@ -16,7 +16,7 @@ type UserRole {
   id: ID! @id
   user: User! @relation(name: "UserToUserRole", onDelete: SET_NULL)
   type: UserRoleType!
-  """TODO: connect to small group"""
+  smallGroup: SmallGroup! @relation(name: "SmallGroupToUserRole", onDelete: SET_NULL)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
@@ -24,7 +24,7 @@ type UserRole {
 type SmallGroup {
   id: ID! @id
   leader: User!
-  """TODO: connect to discipleship community"""
+  members: [UserRole!]! @relation(name: "SmallGroupToUserRole", onDelete: CASCADE)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
