@@ -8,6 +8,7 @@ type User {
   favoriteSnack: String
   userRoles: [UserRole!]! @relation(name: "UserToUserRole", onDelete: CASCADE)
   leadsSmallGroups: [SmallGroup!]!
+  leadsDiscipleshipCommunities: [DiscipleshipCommunity!]!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
@@ -24,7 +25,17 @@ type UserRole {
 type SmallGroup {
   id: ID! @id
   leader: User!
+  discipleshipCommunity: DiscipleshipCommunity
   members: [UserRole!]! @relation(name: "SmallGroupToUserRole", onDelete: CASCADE)
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type DiscipleshipCommunity {
+  id: ID! @id
+  pastor: User!
+  night: DiscipleshipCommunityNight!
+  smallGroups: [SmallGroup!]!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
@@ -36,4 +47,12 @@ enum UserRoleType {
   SMALL_GROUP_COORDINATOR
   DISCIPLESHIP_COMMUNITY_COORDINATOR
   SMALL_GROUP_MEMBER
+}
+
+enum DiscipleshipCommunityNight {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
 }
