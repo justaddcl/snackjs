@@ -9,6 +9,21 @@ const Mutation = {
 
     return user;
   },
+  async createSmallGroup(parent, args, ctx, info) {
+    const smallGroup = await ctx.db.mutation.createSmallGroup(
+      {
+        data: {
+          leader: {
+            connect: {
+              id: args.data.leader,
+            },
+          },
+        },
+      },
+      info
+    );
+    return smallGroup;
+  },
 };
 
 module.exports = Mutation;
