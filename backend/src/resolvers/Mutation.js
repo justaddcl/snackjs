@@ -46,6 +46,22 @@ const Mutation = {
     );
     return smallGroup;
   },
+  async createDiscipleshipCommunity(parent, args, ctx, info) {
+    const discipleshipCommunity = await ctx.db.mutation.createDiscipleshipCommunity(
+      {
+        data: {
+          night: args.data.night,
+          pastor: {
+            connect: {
+              id: args.data.pastor,
+            },
+          },
+        },
+      },
+      info
+    );
+    return discipleshipCommunity;
+  },
 };
 
 module.exports = Mutation;
