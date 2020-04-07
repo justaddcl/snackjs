@@ -1,5 +1,9 @@
 # source: http://localhost:4466
-# timestamp: Mon Apr 06 2020 21:04:08 GMT-0500 (Central Daylight Time)
+# timestamp: Mon Apr 06 2020 21:40:43 GMT-0500 (Central Daylight Time)
+
+type AggregateSmallGroup {
+  count: Int!
+}
 
 type AggregateUser {
   count: Int!
@@ -26,18 +30,23 @@ Long can represent values between -(2^63) and 2^63 - 1.
 scalar Long
 
 type Mutation {
-  createUser(data: UserCreateInput!): User!
   createUserRole(data: UserRoleCreateInput!): UserRole!
-  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  createSmallGroup(data: SmallGroupCreateInput!): SmallGroup!
+  createUser(data: UserCreateInput!): User!
   updateUserRole(data: UserRoleUpdateInput!, where: UserRoleWhereUniqueInput!): UserRole
-  deleteUser(where: UserWhereUniqueInput!): User
+  updateSmallGroup(data: SmallGroupUpdateInput!, where: SmallGroupWhereUniqueInput!): SmallGroup
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   deleteUserRole(where: UserRoleWhereUniqueInput!): UserRole
-  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  deleteSmallGroup(where: SmallGroupWhereUniqueInput!): SmallGroup
+  deleteUser(where: UserWhereUniqueInput!): User
   upsertUserRole(where: UserRoleWhereUniqueInput!, create: UserRoleCreateInput!, update: UserRoleUpdateInput!): UserRole!
-  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  upsertSmallGroup(where: SmallGroupWhereUniqueInput!, create: SmallGroupCreateInput!, update: SmallGroupUpdateInput!): SmallGroup!
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   updateManyUserRoles(data: UserRoleUpdateManyMutationInput!, where: UserRoleWhereInput): BatchPayload!
-  deleteManyUsers(where: UserWhereInput): BatchPayload!
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   deleteManyUserRoles(where: UserRoleWhereInput): BatchPayload!
+  deleteManySmallGroups(where: SmallGroupWhereInput): BatchPayload!
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
   executeRaw(database: PrismaDatabase, query: String!): Json!
 }
 
@@ -73,12 +82,15 @@ enum PrismaDatabase {
 }
 
 type Query {
-  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   userRoles(where: UserRoleWhereInput, orderBy: UserRoleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserRole]!
-  user(where: UserWhereUniqueInput!): User
+  smallGroups(where: SmallGroupWhereInput, orderBy: SmallGroupOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SmallGroup]!
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   userRole(where: UserRoleWhereUniqueInput!): UserRole
-  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  smallGroup(where: SmallGroupWhereUniqueInput!): SmallGroup
+  user(where: UserWhereUniqueInput!): User
   userRolesConnection(where: UserRoleWhereInput, orderBy: UserRoleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserRoleConnection!
+  smallGroupsConnection(where: SmallGroupWhereInput, orderBy: SmallGroupOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SmallGroupConnection!
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -87,9 +99,199 @@ type Query {
   ): Node
 }
 
+type SmallGroup implements Node {
+  id: ID!
+  leader: User!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A connection to a list of items."""
+type SmallGroupConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [SmallGroupEdge]!
+  aggregate: AggregateSmallGroup!
+}
+
+input SmallGroupCreateInput {
+  id: ID
+  leader: UserCreateOneInput!
+}
+
+"""An edge in a connection."""
+type SmallGroupEdge {
+  """The item at the end of the edge."""
+  node: SmallGroup!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum SmallGroupOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type SmallGroupPreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type SmallGroupSubscriptionPayload {
+  mutation: MutationType!
+  node: SmallGroup
+  updatedFields: [String!]
+  previousValues: SmallGroupPreviousValues
+}
+
+input SmallGroupSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [SmallGroupSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [SmallGroupSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [SmallGroupSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: SmallGroupWhereInput
+}
+
+input SmallGroupUpdateInput {
+  leader: UserUpdateOneRequiredInput
+}
+
+input SmallGroupWhereInput {
+  """Logical AND on all given filters."""
+  AND: [SmallGroupWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [SmallGroupWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [SmallGroupWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  leader: UserWhereInput
+}
+
+input SmallGroupWhereUniqueInput {
+  id: ID
+}
+
 type Subscription {
-  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   userRole(where: UserRoleSubscriptionWhereInput): UserRoleSubscriptionPayload
+  smallGroup(where: SmallGroupSubscriptionWhereInput): SmallGroupSubscriptionPayload
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 
 type User implements Node {
@@ -124,6 +326,11 @@ input UserCreateInput {
   dietaryRestrictions: String
   favoriteSnack: String
   userRoles: UserRoleCreateManyWithoutUserInput
+}
+
+input UserCreateOneInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
 }
 
 input UserCreateOneWithoutUserRolesInput {
@@ -591,6 +798,16 @@ input UserSubscriptionWhereInput {
   node: UserWhereInput
 }
 
+input UserUpdateDataInput {
+  name: String
+  email: String
+  password: String
+  admin: Boolean
+  dietaryRestrictions: String
+  favoriteSnack: String
+  userRoles: UserRoleUpdateManyWithoutUserInput
+}
+
 input UserUpdateInput {
   name: String
   email: String
@@ -610,6 +827,13 @@ input UserUpdateManyMutationInput {
   favoriteSnack: String
 }
 
+input UserUpdateOneRequiredInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
+  update: UserUpdateDataInput
+  upsert: UserUpsertNestedInput
+}
+
 input UserUpdateOneRequiredWithoutUserRolesInput {
   create: UserCreateWithoutUserRolesInput
   connect: UserWhereUniqueInput
@@ -624,6 +848,11 @@ input UserUpdateWithoutUserRolesDataInput {
   admin: Boolean
   dietaryRestrictions: String
   favoriteSnack: String
+}
+
+input UserUpsertNestedInput {
+  update: UserUpdateDataInput!
+  create: UserCreateInput!
 }
 
 input UserUpsertWithoutUserRolesInput {
