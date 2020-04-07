@@ -12,7 +12,7 @@ type User {
 
 type UserRole {
   id: ID! @id
-  type: String!
+  type: UserRoleType!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
