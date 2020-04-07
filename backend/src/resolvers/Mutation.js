@@ -9,6 +9,28 @@ const Mutation = {
 
     return user;
   },
+  async createUserRole(parent, args, ctx, info){
+    const userRole = await ctx.db.mutation.createUserRole(
+      {
+        data: {
+          type: args.data.type,
+          user: {
+            connect: {
+              id: args.data.user,
+            },
+          },
+          smallGroup: {
+            connect: {
+              id: args.data.smallGroup,
+            },
+          },
+        },
+      },
+      info
+    );
+
+    return userRole;
+  },
   async createSmallGroup(parent, args, ctx, info) {
     const smallGroup = await ctx.db.mutation.createSmallGroup(
       {
