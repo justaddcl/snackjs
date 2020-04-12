@@ -45,7 +45,7 @@ type Event {
   id: ID! @id
   type: EventType!
   name: String!
-  description: String!
+  description: String
   date: DateTime!
   startTime: DateTime
   endTime: DateTime
