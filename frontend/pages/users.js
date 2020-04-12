@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Head from 'next/head';
 import ContentContainer from '../components/styles/ContentContainer';
-import Users from '../components/Users'
+import Users from '../components/Users';
 
 const UsersPageContainer = styled(ContentContainer)``;
 
