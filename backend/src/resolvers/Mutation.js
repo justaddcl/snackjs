@@ -24,6 +24,17 @@ const Mutation = {
       info
     );
   },
+  async deleteUser(parent, args, ctx, info) {
+    const where = { id: args.id };
+    const user = await ctx.db.query.user({ where }, `{ id }`);
+    // TODO: check is user has permissions to delete user
+    return ctx.db.mutation.deleteUser(
+      {
+        where,
+      },
+      info
+    );
+  },
   async createUserRole(parent, args, ctx, info) {
     const userRole = await ctx.db.mutation.createUserRole(
       {
