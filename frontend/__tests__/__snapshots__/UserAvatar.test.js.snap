@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UserAvatar /> renders and matches snapshot 1`] = `
+<UserAvatar>
+  <UserAvatar__StyledUserAvatar
+    alt="User avatar"
+    height="64px"
+    src="https://source.unsplash.com/collection/8470962/64x64"
+    width="64px"
+  >
+    <img
+      alt="User avatar"
+      className="UserAvatar__StyledUserAvatar-sc-8skf2g-0 cyRimU"
+      height="64px"
+      src="https://source.unsplash.com/collection/8470962/64x64"
+      width="64px"
+    />
+  </UserAvatar__StyledUserAvatar>
+</UserAvatar>
+`;
+
+exports[`<UserAvatar /> renders with size prop and matches snapshot 1`] = `
+<UserAvatar
+  size={32}
+>
+  <UserAvatar__StyledUserAvatar
+    alt="User avatar"
+    height="32px"
+    size={32}
+    src="https://source.unsplash.com/collection/8470962/32x32"
+    width="32px"
+  >
+    <img
+      alt="User avatar"
+      className="UserAvatar__StyledUserAvatar-sc-8skf2g-0 meQzq"
+      height="32px"
+      size={32}
+      src="https://source.unsplash.com/collection/8470962/32x32"
+      width="32px"
+    />
+  </UserAvatar__StyledUserAvatar>
+</UserAvatar>
+`;
