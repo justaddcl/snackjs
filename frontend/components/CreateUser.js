@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
-import Router from 'next/router'
+import Router from 'next/router';
 import gql from 'graphql-tag';
 
 const CREATE_USER_MUTATION = gql`
