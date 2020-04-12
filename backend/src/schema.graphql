@@ -1,6 +1,7 @@
 # import * from './generated/prisma.graphql'
 
 type Query {
+  user(where: UserWhereUniqueInput): User
   users: [User!]!
   userRoles: [UserRole!]!
   smallGroups: [SmallGroup!]!
