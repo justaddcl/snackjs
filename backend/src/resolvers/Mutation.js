@@ -9,7 +9,22 @@ const Mutation = {
 
     return user;
   },
-  async createUserRole(parent, args, ctx, info){
+  updateUser(parent, args, ctx, info) {
+    const updates = { ...args.data };
+    delete updates.id;
+    return ctx.db.mutation.updateUser(
+      {
+        data: {
+          ...updates,
+        },
+        where: {
+          id: args.data.id,
+        },
+      },
+      info
+    );
+  },
+  async createUserRole(parent, args, ctx, info) {
     const userRole = await ctx.db.mutation.createUserRole(
       {
         data: {
