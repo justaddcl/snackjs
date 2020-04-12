@@ -10,6 +10,7 @@ type Query {
 
 type Mutation {
   createUser(data: CreateUserInput): User!
+  updateUser(data: UpdateUserInput!): User!
   createUserRole(data: CreateUserRoleInput): UserRole!
   createSmallGroup(data: CreateSmallGroupInput): SmallGroup!
   createDiscipleshipCommunity(
@@ -22,6 +23,16 @@ input CreateUserInput {
   email: String!
   password: String!
   admin: Boolean!
+  dietaryRestrictions: String
+  favoriteSnack: String
+}
+
+input UpdateUserInput {
+  id: ID!
+  name: String
+  email: String
+  password: String
+  admin: Boolean
   dietaryRestrictions: String
   favoriteSnack: String
 }
