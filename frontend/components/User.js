@@ -29,6 +29,14 @@ export default class User extends Component {
         <p>{user.admin}</p>
         <p>{user.dietaryRestriction}</p>
         <p>{user.favoriteSnack}</p>
+        <Link
+          href={{
+            pathname: 'updateUser',
+            query: { id: user.id },
+          }}
+        >
+          <a>Edit User</a>
+        </Link>
         <DeleteUser id={user.id}>Delete User</DeleteUser>
       </div>
     );
