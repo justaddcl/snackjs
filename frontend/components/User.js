@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
+import DeleteUser from './DeleteUser';
 
 export default class User extends Component {
   static propTypes = {
@@ -28,6 +29,7 @@ export default class User extends Component {
         <p>{user.admin}</p>
         <p>{user.dietaryRestriction}</p>
         <p>{user.favoriteSnack}</p>
+        <DeleteUser id={user.id}>Delete User</DeleteUser>
       </div>
     );
   }
