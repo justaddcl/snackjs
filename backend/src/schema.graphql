@@ -11,6 +11,7 @@ type Query {
 type Mutation {
   createUser(data: CreateUserInput): User!
   updateUser(data: UpdateUserInput!): User!
+  deleteUser(id: ID!): User!
   createUserRole(data: CreateUserRoleInput): UserRole!
   createSmallGroup(data: CreateSmallGroupInput): SmallGroup!
   createDiscipleshipCommunity(
