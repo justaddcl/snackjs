@@ -17,7 +17,7 @@ const ALL_USERS_QUERY = gql`
   }
 `;
 
-export default class Users extends Component {
+class Users extends Component {
   render() {
     return (
       <div>
@@ -40,3 +40,5 @@ export default class Users extends Component {
     );
   }
 }
+
+export default Users;
