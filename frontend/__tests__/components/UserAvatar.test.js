@@ -1,6 +1,6 @@
 import { mount } from 'enzyme';
 import toJSON from 'enzyme-to-json';
-import UserAvatarComponent from '../components/UserAvatar';
+import UserAvatarComponent from '../../components/UserAvatar';
 
 const defaultProps = {
   size: '64px',
