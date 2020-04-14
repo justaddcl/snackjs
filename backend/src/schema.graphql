@@ -2,7 +2,12 @@
 
 type Query {
   user(where: UserWhereUniqueInput): User
-  users: [User!]!
+  users(
+    where: UserWhereInput
+    orderBy: UserOrderByInput
+    skip: Int
+    first: Int
+  ): [User!]!
   usersConnection(where: UserWhereInput): UserConnection!
   userRoles: [UserRole!]!
   smallGroups: [SmallGroup!]!
