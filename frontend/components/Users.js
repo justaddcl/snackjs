@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import User from './User';
+import Pagination from './Pagination';
 
 const ALL_USERS_QUERY = gql`
   query ALL_USERS_QUERY {
@@ -22,6 +23,7 @@ class Users extends Component {
     return (
       <div>
         <p>Users!</p>
+        <Pagination page={this.props.page} item="users" />
         <Query query={ALL_USERS_QUERY}>
           {({ data, error, loading }) => {
             if (loading) return <p>Loading...</p>;
@@ -35,6 +37,7 @@ class Users extends Component {
             );
           }}
         </Query>
+        <Pagination page={this.props.page} item="users" />
       </div>
     );
   }
