@@ -3,6 +3,7 @@
 type Query {
   user(where: UserWhereUniqueInput): User
   users: [User!]!
+  usersConnection(where: UserWhereInput): UserConnection!
   userRoles: [UserRole!]!
   smallGroups: [SmallGroup!]!
   discipleshipCommunities: [DiscipleshipCommunity!]!
