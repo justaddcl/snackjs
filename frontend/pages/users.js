@@ -11,7 +11,7 @@ const UsersPage = props => (
     <Head>
       <title>Snack App | Users</title>
     </Head>
-    <Users />
+    <Users page={parseInt(props.query.page) || 1} />
   </UsersPageContainer>
 );
 
