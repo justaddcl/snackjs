@@ -6,6 +6,7 @@ import AdminMenu from './AdminMenu';
 import CoordinatorMenu from './CoordinatorMenu';
 import UserMenu from './UserMenu';
 import UserAvatar from './UserAvatar';
+import CurrentUser from './CurrentUser';
 
 const StyledAuxiliaryMenu = styled.ul`
   grid-column: -1;
@@ -37,7 +38,7 @@ const Item = styled.li`
       ${theme.colors.gradient.purple},
       ${theme.colors.gradient.blue}
     );
-    content: "";
+    content: '';
     display: block;
     height: 4px;
     margin-top: -4px;
@@ -65,36 +66,45 @@ const ItemName = styled.span`
 const AuxiliaryMenuLink = ItemName.withComponent('a');
 
 const AuxiliaryMenu = () => (
-  <StyledAuxiliaryMenu>
-    {/* if user logged in */}
-    <Item>
-      <ItemName>
-        Admin
-        <DropdownIcon />
-      </ItemName>
-      <AdminMenu />
-    </Item>
-    <Item>
-      <ItemName>
-        Coordinator
-        <DropdownIcon />
-      </ItemName>
-      <CoordinatorMenu />
-    </Item>
-    <Item>
-      <Link href="/me">
-        <AuxiliaryMenuLink avatar>
-          <UserAvatar size="32" />
-        </AuxiliaryMenuLink>
-      </Link>
-      <UserMenu />
-    </Item>
-    <Item>
-      <Link href="/login">
-        <AuxiliaryMenuLink>Log in</AuxiliaryMenuLink>
-      </Link>
-    </Item>
-  </StyledAuxiliaryMenu>
+  <CurrentUser>
+    {({ data: { currentUser } }) => (
+      <StyledAuxiliaryMenu>
+        {currentUser && currentUser.admin && (
+          <Item>
+            <ItemName>
+              Admin
+              <DropdownIcon />
+            </ItemName>
+            <AdminMenu />
+          </Item>
+        )}
+        <Item>
+          <ItemName>
+            Coordinator
+            <DropdownIcon />
+          </ItemName>
+          <CoordinatorMenu />
+        </Item>
+        {currentUser && (
+          <Item>
+            <Link href="/me">
+              <AuxiliaryMenuLink avatar>
+                <UserAvatar size="32" />
+              </AuxiliaryMenuLink>
+            </Link>
+            <UserMenu />
+          </Item>
+        )}
+        {!currentUser && (
+          <Item>
+            <Link href="/signin">
+              <AuxiliaryMenuLink>Sign in</AuxiliaryMenuLink>
+            </Link>
+          </Item>
+        )}
+      </StyledAuxiliaryMenu>
+    )}
+  </CurrentUser>
 );
 
 export default AuxiliaryMenu;
