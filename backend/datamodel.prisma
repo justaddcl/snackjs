@@ -9,6 +9,8 @@ type User {
   userRoles: [UserRole!]! @relation(name: "UserToUserRole", onDelete: CASCADE)
   leadsSmallGroups: [SmallGroup!]!
   leadsDiscipleshipCommunities: [DiscipleshipCommunity!]!
+  resetToken: String
+  resetTokenExpiry: Float
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
