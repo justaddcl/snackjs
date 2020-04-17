@@ -1,5 +1,6 @@
 const Mutation = {
   async createUser(parent, args, ctx, info) {
+    args.data.email = args.data.email.toLowerCase();
     const user = await ctx.db.mutation.createUser(
       {
         data: {
