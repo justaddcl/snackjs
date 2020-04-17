@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Sat Apr 11 2020 19:42:14 GMT-0500 (Central Daylight Time)
+# timestamp: Thu Apr 16 2020 23:55:01 GMT-0500 (Central Daylight Time)
 
 type AggregateDiscipleshipCommunity {
   count: Int!
@@ -1343,6 +1343,8 @@ type User implements Node {
   userRoles(where: UserRoleWhereInput, orderBy: UserRoleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserRole!]
   leadsSmallGroups(where: SmallGroupWhereInput, orderBy: SmallGroupOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SmallGroup!]
   leadsDiscipleshipCommunities(where: DiscipleshipCommunityWhereInput, orderBy: DiscipleshipCommunityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [DiscipleshipCommunity!]
+  resetToken: String
+  resetTokenExpiry: Float
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -1365,6 +1367,8 @@ input UserCreateInput {
   admin: Boolean!
   dietaryRestrictions: String
   favoriteSnack: String
+  resetToken: String
+  resetTokenExpiry: Float
   userRoles: UserRoleCreateManyWithoutUserInput
   leadsSmallGroups: SmallGroupCreateManyWithoutLeaderInput
   leadsDiscipleshipCommunities: DiscipleshipCommunityCreateManyWithoutPastorInput
@@ -1393,6 +1397,8 @@ input UserCreateWithoutLeadsDiscipleshipCommunitiesInput {
   admin: Boolean!
   dietaryRestrictions: String
   favoriteSnack: String
+  resetToken: String
+  resetTokenExpiry: Float
   userRoles: UserRoleCreateManyWithoutUserInput
   leadsSmallGroups: SmallGroupCreateManyWithoutLeaderInput
 }
@@ -1405,6 +1411,8 @@ input UserCreateWithoutLeadsSmallGroupsInput {
   admin: Boolean!
   dietaryRestrictions: String
   favoriteSnack: String
+  resetToken: String
+  resetTokenExpiry: Float
   userRoles: UserRoleCreateManyWithoutUserInput
   leadsDiscipleshipCommunities: DiscipleshipCommunityCreateManyWithoutPastorInput
 }
@@ -1417,6 +1425,8 @@ input UserCreateWithoutUserRolesInput {
   admin: Boolean!
   dietaryRestrictions: String
   favoriteSnack: String
+  resetToken: String
+  resetTokenExpiry: Float
   leadsSmallGroups: SmallGroupCreateManyWithoutLeaderInput
   leadsDiscipleshipCommunities: DiscipleshipCommunityCreateManyWithoutPastorInput
 }
@@ -1445,6 +1455,10 @@ enum UserOrderByInput {
   dietaryRestrictions_DESC
   favoriteSnack_ASC
   favoriteSnack_DESC
+  resetToken_ASC
+  resetToken_DESC
+  resetTokenExpiry_ASC
+  resetTokenExpiry_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -1459,6 +1473,8 @@ type UserPreviousValues {
   admin: Boolean!
   dietaryRestrictions: String
   favoriteSnack: String
+  resetToken: String
+  resetTokenExpiry: Float
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -1923,6 +1939,8 @@ input UserUpdateInput {
   admin: Boolean
   dietaryRestrictions: String
   favoriteSnack: String
+  resetToken: String
+  resetTokenExpiry: Float
   userRoles: UserRoleUpdateManyWithoutUserInput
   leadsSmallGroups: SmallGroupUpdateManyWithoutLeaderInput
   leadsDiscipleshipCommunities: DiscipleshipCommunityUpdateManyWithoutPastorInput
@@ -1935,6 +1953,8 @@ input UserUpdateManyMutationInput {
   admin: Boolean
   dietaryRestrictions: String
   favoriteSnack: String
+  resetToken: String
+  resetTokenExpiry: Float
 }
 
 input UserUpdateOneRequiredWithoutLeadsDiscipleshipCommunitiesInput {
@@ -1965,6 +1985,8 @@ input UserUpdateWithoutLeadsDiscipleshipCommunitiesDataInput {
   admin: Boolean
   dietaryRestrictions: String
   favoriteSnack: String
+  resetToken: String
+  resetTokenExpiry: Float
   userRoles: UserRoleUpdateManyWithoutUserInput
   leadsSmallGroups: SmallGroupUpdateManyWithoutLeaderInput
 }
@@ -1976,6 +1998,8 @@ input UserUpdateWithoutLeadsSmallGroupsDataInput {
   admin: Boolean
   dietaryRestrictions: String
   favoriteSnack: String
+  resetToken: String
+  resetTokenExpiry: Float
   userRoles: UserRoleUpdateManyWithoutUserInput
   leadsDiscipleshipCommunities: DiscipleshipCommunityUpdateManyWithoutPastorInput
 }
@@ -1987,6 +2011,8 @@ input UserUpdateWithoutUserRolesDataInput {
   admin: Boolean
   dietaryRestrictions: String
   favoriteSnack: String
+  resetToken: String
+  resetTokenExpiry: Float
   leadsSmallGroups: SmallGroupUpdateManyWithoutLeaderInput
   leadsDiscipleshipCommunities: DiscipleshipCommunityUpdateManyWithoutPastorInput
 }
@@ -2259,6 +2285,68 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   favoriteSnack_not_ends_with: String
+  resetToken: String
+
+  """All values that are not equal to given value."""
+  resetToken_not: String
+
+  """All values that are contained in given list."""
+  resetToken_in: [String!]
+
+  """All values that are not contained in given list."""
+  resetToken_not_in: [String!]
+
+  """All values less than the given value."""
+  resetToken_lt: String
+
+  """All values less than or equal the given value."""
+  resetToken_lte: String
+
+  """All values greater than the given value."""
+  resetToken_gt: String
+
+  """All values greater than or equal the given value."""
+  resetToken_gte: String
+
+  """All values containing the given string."""
+  resetToken_contains: String
+
+  """All values not containing the given string."""
+  resetToken_not_contains: String
+
+  """All values starting with the given string."""
+  resetToken_starts_with: String
+
+  """All values not starting with the given string."""
+  resetToken_not_starts_with: String
+
+  """All values ending with the given string."""
+  resetToken_ends_with: String
+
+  """All values not ending with the given string."""
+  resetToken_not_ends_with: String
+  resetTokenExpiry: Float
+
+  """All values that are not equal to given value."""
+  resetTokenExpiry_not: Float
+
+  """All values that are contained in given list."""
+  resetTokenExpiry_in: [Float!]
+
+  """All values that are not contained in given list."""
+  resetTokenExpiry_not_in: [Float!]
+
+  """All values less than the given value."""
+  resetTokenExpiry_lt: Float
+
+  """All values less than or equal the given value."""
+  resetTokenExpiry_lte: Float
+
+  """All values greater than the given value."""
+  resetTokenExpiry_gt: Float
+
+  """All values greater than or equal the given value."""
+  resetTokenExpiry_gte: Float
   createdAt: DateTime
 
   """All values that are not equal to given value."""
