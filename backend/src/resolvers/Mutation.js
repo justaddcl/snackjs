@@ -1,4 +1,8 @@
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+
+const MS_IN_A_YEAR = 1000 * 60 * 60 * 24 * 365;
+
 const Mutation = {
   async createUser(parent, args, ctx, info) {
     args.data.email = args.data.email.toLowerCase();
@@ -13,7 +17,12 @@ const Mutation = {
       },
       info
     );
-
+    // create JWT for new user, signing them in
+    const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
+    ctx.response.cookie('_snackjs_session', token, {
+      httpOnly: true,
+      maxAge: MS_IN_A_YEAR,
+    });
     return user;
   },
   updateUser(parent, args, ctx, info) {
