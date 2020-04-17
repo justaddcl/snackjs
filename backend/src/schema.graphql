@@ -19,6 +19,7 @@ type Mutation {
   createUser(data: CreateUserInput): User!
   updateUser(data: UpdateUserInput!): User!
   deleteUser(id: ID!): User!
+  signin(data: SigninInput): User
   createUserRole(data: CreateUserRoleInput): UserRole!
   createSmallGroup(data: CreateSmallGroupInput): SmallGroup!
   createDiscipleshipCommunity(
@@ -43,6 +44,11 @@ input UpdateUserInput {
   admin: Boolean
   dietaryRestrictions: String
   favoriteSnack: String
+}
+
+input SigninInput {
+  email: String!
+  password: String!
 }
 
 input CreateUserRoleInput {
