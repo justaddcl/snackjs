@@ -8,6 +8,7 @@ const Mutation = {
         data: {
           ...args.data,
           password,
+          admin: false,
         },
       },
       info
