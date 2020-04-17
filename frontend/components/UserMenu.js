@@ -7,6 +7,8 @@ import AuxiliaryDropdownMenu from './styles/AuxiliaryDropdownMenu';
 import AuxiliaryDropdownItem from './styles/AuxiliaryDropdownItem';
 import AuxiliaryDropdownLink from './styles/AuxiliaryDropdownLink';
 import UserAvatar from './UserAvatar';
+import CurrentUser from './CurrentUser';
+import Signout from './Signout';
 
 const DashboardLink = styled.a`
   background: ${theme.colors.indigo[900]};
@@ -48,46 +50,55 @@ const UserMenuContainer = styled.div`
 const UserMenu = () => (
   <AuxiliaryDropdown className="auxiliary-dropdown">
     <AuxiliaryDropdownContainer>
-      <UserProfile>
-        <UserAvatar size="48" />
-        <UserProfileText>
-          <UserName>Current User</UserName>
-          <Link href="/">
-            <DashboardLink>Dashboard</DashboardLink>
-          </Link>
-        </UserProfileText>
-      </UserProfile>
-      <UserMenuContainer>
-        <AuxiliaryDropdownMenu>
-          <AuxiliaryDropdownItem>
-            <Link href="/me">
-              <AuxiliaryDropdownLink>Profile</AuxiliaryDropdownLink>
-            </Link>
-          </AuxiliaryDropdownItem>
-          <AuxiliaryDropdownItem>
-            <Link href="#">
-              <AuxiliaryDropdownLink>My small group</AuxiliaryDropdownLink>
-            </Link>
-          </AuxiliaryDropdownItem>
-          <AuxiliaryDropdownItem>
-            <Link href="#">
-              <AuxiliaryDropdownLink>
-                My Discipleship Community
-              </AuxiliaryDropdownLink>
-            </Link>
-          </AuxiliaryDropdownItem>
-          <AuxiliaryDropdownItem>
-            <Link href="/me">
-              <AuxiliaryDropdownLink>Account settings</AuxiliaryDropdownLink>
-            </Link>
-          </AuxiliaryDropdownItem>
-          <AuxiliaryDropdownItem logout>
-            <Link href="/logout">
-              <AuxiliaryDropdownLink logout>Log out</AuxiliaryDropdownLink>
-            </Link>
-          </AuxiliaryDropdownItem>
-        </AuxiliaryDropdownMenu>
-      </UserMenuContainer>
+      <CurrentUser>
+        {({ data: { currentUser } }) => (
+          <>
+            <UserProfile>
+              <UserAvatar size="48" />
+              <UserProfileText>
+                <UserName>{currentUser && currentUser.name}</UserName>
+                <Link href="/">
+                  <DashboardLink>Dashboard</DashboardLink>
+                </Link>
+              </UserProfileText>
+            </UserProfile>
+            <UserMenuContainer>
+              <AuxiliaryDropdownMenu>
+                <AuxiliaryDropdownItem>
+                  {/* TODO: create /me page */}
+                  <Link href="/me">
+                    <AuxiliaryDropdownLink>Profile</AuxiliaryDropdownLink>
+                  </Link>
+                </AuxiliaryDropdownItem>
+                <AuxiliaryDropdownItem>
+                  <Link href="#">
+                    <AuxiliaryDropdownLink>
+                      My small group
+                    </AuxiliaryDropdownLink>
+                  </Link>
+                </AuxiliaryDropdownItem>
+                <AuxiliaryDropdownItem>
+                  <Link href="#">
+                    <AuxiliaryDropdownLink>
+                      My Discipleship Community
+                    </AuxiliaryDropdownLink>
+                  </Link>
+                </AuxiliaryDropdownItem>
+                <AuxiliaryDropdownItem>
+                  <Link href="/me">
+                    <AuxiliaryDropdownLink>
+                      Account settings
+                    </AuxiliaryDropdownLink>
+                  </Link>
+                </AuxiliaryDropdownItem>
+                <AuxiliaryDropdownItem logout>
+                  <Signout />
+                </AuxiliaryDropdownItem>
+              </AuxiliaryDropdownMenu>
+            </UserMenuContainer>
+          </>
+        )}
+      </CurrentUser>
     </AuxiliaryDropdownContainer>
   </AuxiliaryDropdown>
 );
