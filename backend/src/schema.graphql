@@ -1,11 +1,28 @@
 # import * from './generated/prisma.graphql'
 
 type Query {
-  users: [User!]!
+  user(where: UserWhereUniqueInput): User
+  users(
+    where: UserWhereInput
+    orderBy: UserOrderByInput
+    skip: Int
+    first: Int
+  ): [User!]!
+  usersConnection(where: UserWhereInput): UserConnection!
+  userRoles: [UserRole!]!
+  smallGroups: [SmallGroup!]!
+  discipleshipCommunities: [DiscipleshipCommunity!]!
 }
 
 type Mutation {
   createUser(data: CreateUserInput): User!
+  updateUser(data: UpdateUserInput!): User!
+  deleteUser(id: ID!): User!
+  createUserRole(data: CreateUserRoleInput): UserRole!
+  createSmallGroup(data: CreateSmallGroupInput): SmallGroup!
+  createDiscipleshipCommunity(
+    data: CreateDiscipleshipCommunityInput
+  ): DiscipleshipCommunity!
 }
 
 input CreateUserInput {
@@ -15,4 +32,29 @@ input CreateUserInput {
   admin: Boolean!
   dietaryRestrictions: String
   favoriteSnack: String
+}
+
+input UpdateUserInput {
+  id: ID!
+  name: String
+  email: String
+  password: String
+  admin: Boolean
+  dietaryRestrictions: String
+  favoriteSnack: String
+}
+
+input CreateUserRoleInput {
+  type: UserRoleType!
+  user: ID!
+  smallGroup: ID!
+}
+
+input CreateSmallGroupInput {
+  leader: ID!
+}
+
+input CreateDiscipleshipCommunityInput {
+  pastor: ID!
+  night: DiscipleshipCommunityNight!
 }
