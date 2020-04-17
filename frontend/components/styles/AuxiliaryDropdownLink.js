@@ -2,8 +2,7 @@ import styled from 'styled-components';
 import theme from './theme';
 
 const AuxiliaryDropdownLink = styled.a`
-  color: ${props =>
-    props.logout ? theme.colors.blueGrey[500] : theme.colors.blueGrey[700]};
+  color: ${theme.colors.blueGrey[700]};
   cursor: pointer;
   font-weight: 400;
 
@@ -16,8 +15,7 @@ const AuxiliaryDropdownLink = styled.a`
   `}
 
   &:hover {
-    color: ${props =>
-      props.logout ? theme.colors.blueGrey[300] : theme.colors.blueGrey[500]};
+    color: ${theme.colors.blueGrey[500]};
   }
 `;
 
