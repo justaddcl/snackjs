@@ -1,10 +1,13 @@
+const bcrypt = require('bcryptjs');
 const Mutation = {
   async createUser(parent, args, ctx, info) {
     args.data.email = args.data.email.toLowerCase();
+    const password = await bcrypt.hash(args.data.password, 10);
     const user = await ctx.db.mutation.createUser(
       {
         data: {
           ...args.data,
+          password,
         },
       },
       info
