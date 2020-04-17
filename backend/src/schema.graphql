@@ -2,6 +2,7 @@
 
 type Query {
   user(where: UserWhereUniqueInput): User
+  currentUser: User
   users(
     where: UserWhereInput
     orderBy: UserOrderByInput
