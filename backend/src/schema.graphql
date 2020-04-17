@@ -36,9 +36,6 @@ input CreateUserInput {
   name: String!
   email: String!
   password: String!
-  admin: Boolean!
-  dietaryRestrictions: String
-  favoriteSnack: String
 }
 
 input UpdateUserInput {
