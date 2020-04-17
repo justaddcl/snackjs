@@ -73,6 +73,10 @@ const Mutation = {
     });
     return user;
   },
+  signout(parent, args, ctx, info) {
+    ctx.response.clearCookie('_snackjs_session');
+    return { message: 'User has been signed out' };
+  },
   async createUserRole(parent, args, ctx, info) {
     const userRole = await ctx.db.mutation.createUserRole(
       {
