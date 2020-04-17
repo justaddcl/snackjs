@@ -20,11 +20,16 @@ type Mutation {
   updateUser(data: UpdateUserInput!): User!
   deleteUser(id: ID!): User!
   signin(data: SigninInput): User
+  signout: SuccessMessage
   createUserRole(data: CreateUserRoleInput): UserRole!
   createSmallGroup(data: CreateSmallGroupInput): SmallGroup!
   createDiscipleshipCommunity(
     data: CreateDiscipleshipCommunityInput
   ): DiscipleshipCommunity!
+}
+
+type SuccessMessage {
+  message: String
 }
 
 input CreateUserInput {
